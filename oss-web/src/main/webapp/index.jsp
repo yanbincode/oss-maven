@@ -1,0 +1,1 @@
+<jsp:forward page="ossUser.do?method=login"></jsp:forward>

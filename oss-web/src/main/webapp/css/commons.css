@@ -1,0 +1,188 @@
+@CHARSET "UTF-8";
+
+/*================层样式=====================*/
+#super {
+	width: 100%;
+	height: 600px;
+}
+
+#left {
+	width: 15%;
+	height: 600px;
+	background-color: #698CC3;
+	color: #FFFFFF;
+	float: left;
+}
+
+#left_up {
+	width: 100%;
+	height: 200px;
+	background-color: #698CC3;
+	padding-top: 40px;
+	color: #FFFFFF;
+	float: left;
+}
+
+#left_down {
+	width: 100%;
+	background-color: #698CC3;
+	color: #FFFFFF;
+	float: left;
+	padding-top: 20px;
+}
+
+#right {
+	width: 83%;
+	height: 600px;
+	background-color: #D6E0EF;
+	float: left;
+}
+
+#middle {
+	width: 1.5%;
+	height: 600px;
+	background-color: #3A5F94;
+	color: #FFFFFF;
+	float: left;
+	cursor: hand;
+}
+
+#form {
+	width: 500px;
+	background-image: url("../images/buttom.PNG");
+	background-repeat: repeat-x;
+	background-position: bottom;
+	background-color: white;
+}
+
+/*灰化层覆盖主窗口*/
+#full_div {
+	display: none;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: #ADADAD;
+	z-index: 1;
+	-moz-opacity: 0.8;
+	opacity: .80;
+	/*透明度*/
+	filter: alpha(opacity = 80);
+}
+
+/*注册信息的层*/
+#register {
+	display: none;
+	position: absolute;
+	top: 10%;
+	left: 30%;
+	width: 40%;
+	height: 75%;
+	padding: 16px;
+	background-color: white;
+	z-index: 2;
+	overflow: auto;
+}
+
+/*===========================元素样式=======================================*/
+/*页面默认字体*/
+body {
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: gray;
+}
+
+/*表格中默认字体*/
+table {
+	font-size: 14px;
+	color: gray;
+}
+
+.form_table span {
+	font-size: 12px;
+	color: red;
+}
+
+.list_table {
+	width: 95%;
+	font-size: 12px;
+	color: #FFFFFF;
+	border: 2px solid #698CC3;
+}
+
+.list th {
+	color: #000000;
+	border: 1px solid #698CC3;
+	background-color: #EFEFEF;
+	font-size: 12px;
+	text-align: center;
+}
+
+.list td {
+	word-break: break-all;
+	color: #000000;
+	border: 1px solid #698CC3;
+	background-color: #FFFFFF;
+	text-align: center;
+}
+
+/*输入框*/
+.box {
+	border: 1px solid #004E98;
+	width: 350px;
+	height: 26px;
+	font-size: 16px;
+}
+
+/*统计日期输入框*/
+.stat_box {
+	border: 1px solid #004E98;
+	width: 80px;
+	height: 20px;
+	font-size: 16px;
+}
+
+/*注册输入框*/
+.register_box {
+	border: 1px solid #004E98;
+	width: 250px;
+	height: 26px;
+	font-size: 16px;
+}
+
+/*textarea框样式*/
+textarea {
+	border: 1px solid #004E98;
+	width: 350px;
+	font-size: 16px;
+}
+
+/*按钮*/
+.button {
+	background-color: #E16929;
+	color: #FFFFFF;
+	width: 100px;
+}
+
+/*列表左边框的链接样式*/
+#left a:link {
+	font-size: 18px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#left a:visited {
+	font-size: 18px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#left a:hover {
+	font-size: 18px;
+	font-weight: bold;
+	color: RED;
+	text-decoration: none;
+}

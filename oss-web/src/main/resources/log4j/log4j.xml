@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true">
+
+	<!--
+		Loggers组件在此系统中被分为五个级别：DEBUG、INFO、WARN、ERROR和FATAL。这五个级别是有顺序的， DEBUG
+		Log4j有一个规则：假设Loggers级别为P，如果在Loggers中发生了一个级别Q比P高，则可以启动，否则屏蔽掉。
+		假设你定义的级别是info，那么error和warn的日志可以显示而比他低的debug信息就不显示了。
+	-->
+
+	<!--
+		# -X号:X信息输出时左对齐； 
+		# %p:日志信息级别 
+		# %d{}:日志信息产生时间 
+		# %c:日志信息所在地（类名） 
+		# %m:产生的日志具体信息 
+		# %n:输出日志信息换行
+	-->
+
+	<!-- Appenders(输出源) -->
+	<appender name="oss" class="org.apache.log4j.RollingFileAppender">
+		<!-- 输出的区域 -->
+		<param name="File" value="/oss/log/oss.log" /><!-- 指定路径 -->
+		<param name="append" value="true" /><!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->
+		<param name="MaxFileSize" value="100MB" />
+		<param name="encoding" value="utf-8" />
+		<param name="ImmediateFlush" value="true" />
+		<!-- Layouts(布局) -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %C - %m%n" /><!-- 设置输出文件项目和格式 -->
+		</layout>
+	</appender>
+
+	<!-- Loggers(记录器) -->	
+	<logger name="oss" additivity="false">
+		<level value="error" /><!-- 设置级别 -->
+		<appender-ref ref="oss" /><!-- 与前面的通道appender id相对应 -->
+	</logger>
+	
+	<!-- 设置接收所有输出的通道 -->
+	<root>
+		<level value="error" />
+		<appender-ref ref="oss"/>
+	</root>
+</log4j:configuration>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="     
+          http://www.springframework.org/schema/beans     
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd     
+          http://www.springframework.org/schema/tx     
+          http://www.springframework.org/schema/tx/spring-tx-3.0.xsd    
+          http://www.springframework.org/schema/context     
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+          http://www.springframework.org/schema/jee
+          http://www.springframework.org/schema/jee/spring-jee-3.0.xsd 
+          http://www.springframework.org/schema/aop     
+          http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+	default-autowire="byName">
+	
+	<!-- spring bean config -->
+	<context:component-scan base-package="service,dao,trigger" />
+	<!-- data source --> 
+	<jee:jndi-lookup id="ossDataSource" jndi-name="java:comp/env/jdbc/OssDataSource" /><!-- jndi命名-->
+	
+	<!-- Hibernate 实体命名规则 -->
+	<bean id="namingStrategy" class="org.hibernate.cfg.ImprovedNamingStrategy" />
+	<!-- spring 配置hibernate session factory 。注意：这个配置需要加载ejb3-persistence.jar的包-->
+	<bean id="ossSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="ossDataSource" />
+		<!-- 实体包扫描，替代配置映射文件 -->
+		<property name="packagesToScan">
+			<list>
+				<value>model</value>
+			</list>
+		</property>
+		<!-- 配置hibernate的属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+				<prop key="show_sql">false</prop>
+				<prop key="format_sql">false</prop>
+			</props>
+		</property>
+		<!-- 开启hibernate字段名称匹配规则 -->
+		<property name="namingStrategy" ref="namingStrategy" />
+	</bean>
+	
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="ossSessionFactory" />
+    </bean>
+    
+    <!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+		
+	<bean id="messageUtils" class="common.utils.MessageUtils" init-method="init">
+		<property name="exceptionResource" value="classpath:properties/exception.properties" />
+		<property name="infoResource" value="classpath:properties/info.properties" />
+		<property name="validatorResource" value="classpath:properties/validator.properties" />
+	</bean>	
+	<!-- 定时器 -->
+	<bean id="scheduler" class="common.trigger.OssSchedulerFactoryBean" />
+	
+</beans>
