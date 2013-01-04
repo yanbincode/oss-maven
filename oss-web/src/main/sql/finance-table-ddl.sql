@@ -114,6 +114,28 @@ create sequence s_year_record
 increment by 1
 start with 1;
 
+--统计类型表
+create table account_type (
+       record_id number,
+       type_id varchar2(2),
+       type_name varchar2(255),
+       use_place varchar2(10),
+       active varchar2(2),
+       type_description varchar2(4000),
+       creator_id number,
+       created_time date,
+       modifier_id number,
+       modified_time date
+)
+tablespace finance;
+
+alter table account_type
+add constraint pk_account_type primary key(record_id);
+
+create sequence s_account_type
+increment by 1
+start with 1;
+
 --建立member表
 create table member_info (
   member_id number,  --自增,主键
@@ -139,14 +161,13 @@ start with 1;
 alter table member_info
 add constraint pk_member primary key(member_id);
 
---统计类型表
-create table account_type (
-       record_id number,
-       type_id varchar2(2),
-       type_name varchar2(255),
-       use_place varchar2(10),
+--资源
+create table oss_resource (
+       resource_id number,
+       name varchar2(255),
+       type varchar2(2),
        active varchar2(2),
-       type_description varchar2(4000),
+       description varchar2(4000),
        creator_id number,
        created_time date,
        modifier_id number,
@@ -154,10 +175,61 @@ create table account_type (
 )
 tablespace finance;
 
-alter table account_type
-add constraint pk_account_type primary key(record_id);
+alter table oss_resource
+add constraint pk_oss_resource primary key(resource_id);
 
-create sequence s_account_type
+create sequence s_oss_resource
+increment by 1
+start with 1;
+
+--角色
+create table oss_role (
+       role_id number,
+       name varchar2(255),
+       role_level varchar2(2),
+       active varchar2(2),
+       description varchar2(4000),
+       creator_id number,
+       created_time date,
+       modifier_id number,
+       modified_time date
+)
+tablespace finance;
+
+alter table oss_role
+add constraint pk_oss_role primary key(role_id);
+
+create sequence s_oss_role
+increment by 1
+start with 1;
+
+--人员角色表
+create table oss_member_role (
+       record_id number,
+       member_id number,
+       role_id number
+)
+tablespace finance;
+
+alter table oss_member_role
+add constraint pk_oss_member_role primary key(record_id);
+
+create sequence s_oss_member_role
+increment by 1
+start with 1;
+
+--角色资源表
+create table oss_role_resource (
+       record_id number,
+       role_id number,
+       resource_id number
+)
+tablespace finance;
+
+alter table oss_role_resource
+add constraint pk_oss_role_resource primary key(record_id);
+
+create sequence s_oss_role_resource
 increment by 1
 start with 1;
 
