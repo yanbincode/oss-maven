@@ -281,8 +281,10 @@
 	</build>
 	<modules>
 		<module>oss-common</module>
-		<module>oss-service</module>
 		<module>oss-dao</module>
+		<module>oss-service</module>
+		<module>oss-security</module>
 		<module>oss-web</module>
 	</modules>
 </project>
+ 
