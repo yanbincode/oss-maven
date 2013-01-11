@@ -14,6 +14,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/**
+ * 角色表
+ * 
+ * @author yanbin
+ * 
+ */
 @Entity
 @Table(name = "OSS_ROLE")
 public class OssRole implements Serializable {
@@ -24,14 +30,18 @@ public class OssRole implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_OSS_ROLE")
 	@SequenceGenerator(name = "S_OSS_ROLE", allocationSize = 1, sequenceName = "S_OSS_ROLE")
 	private Long roleId;
-	private String roleName;
-	private String status;
-	@ManyToMany(cascade = CascadeType.REFRESH)
-	@JoinTable(name = "OSS_USER_ROLE", joinColumns = @JoinColumn(name = "ROLE_ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID"))
-	private Set<OssUser> ossUsers;
+	private String name;
+	private String roleLevel;
+	private String active;
+	/** 多对多关联关系：角色资源关系 */
 	@ManyToMany(cascade = CascadeType.REFRESH)
 	@JoinTable(name = "OSS_ROLE_RESOURCE", joinColumns = @JoinColumn(name = "ROLE_ID"), inverseJoinColumns = @JoinColumn(name = "RESOURCE_ID"))
 	private Set<OssResource> ossResource;
+	/** 多对多关联关系：角色人员关系 */
+	@ManyToMany(cascade = CascadeType.REFRESH)
+	@JoinTable(name = "OSS_MEMBER_ROLE", joinColumns = @JoinColumn(name = "ROLE_ID"), inverseJoinColumns = @JoinColumn(name = "MEMBER_ID"))
+	private Set<OssUser> ossUsers;
+	private String description;
 
 	public Long getRoleId() {
 		return roleId;
@@ -41,20 +51,36 @@ public class OssRole implements Serializable {
 		this.roleId = roleId;
 	}
 
-	public String getRoleName() {
-		return roleName;
+	public String getName() {
+		return name;
 	}
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getRoleLevel() {
+		return roleLevel;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setRoleLevel(String roleLevel) {
+		this.roleLevel = roleLevel;
+	}
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
+
+	public Set<OssResource> getOssResource() {
+		return ossResource;
+	}
+
+	public void setOssResource(Set<OssResource> ossResource) {
+		this.ossResource = ossResource;
 	}
 
 	public Set<OssUser> getOssUsers() {
@@ -65,12 +91,12 @@ public class OssRole implements Serializable {
 		this.ossUsers = ossUsers;
 	}
 
-	public Set<OssResource> getOssResource() {
-		return ossResource;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setOssResource(Set<OssResource> ossResource) {
-		this.ossResource = ossResource;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

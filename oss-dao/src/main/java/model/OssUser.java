@@ -1,12 +1,17 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -37,6 +42,10 @@ public class OssUser implements Serializable {
 	private Long idCard;
 	private String userName;
 	private String passWord;
+	/** 多对多关系：人员和角色关系 */
+	@ManyToMany(cascade = CascadeType.REFRESH)
+	@JoinTable(name = "OSS_MEMBER_ROLE", joinColumns = @JoinColumn(name = "MEMBER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+	private Set<OssRole> ossRoles;
 
 	public Long getUserId() {
 		return userId;
@@ -100,6 +109,14 @@ public class OssUser implements Serializable {
 
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
+	}
+
+	public Set<OssRole> getOssRoles() {
+		return ossRoles;
+	}
+
+	public void setOssRoles(Set<OssRole> ossRoles) {
+		this.ossRoles = ossRoles;
 	}
 
 }
