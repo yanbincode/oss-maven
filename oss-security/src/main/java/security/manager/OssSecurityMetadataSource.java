@@ -34,25 +34,19 @@ public class OssSecurityMetadataSource implements FilterInvocationSecurityMetada
 
 		resourceMap = new HashMap<String, Collection<ConfigAttribute>>();
 		Collection<ConfigAttribute> attrRoleUsers = new ArrayList<ConfigAttribute>();
-		// 配置指定角色
 		ConfigAttribute attrRoleUser = new SecurityConfig("ROLE_USER");
-		// 将角色注册到资源角色关系中
 		attrRoleUsers.add(attrRoleUser);
-		// 配置资源角色关系。模拟没有修改权限
 		resourceMap.put("/resource.do?method=add", attrRoleUsers);
 		resourceMap.put("/resource.do?method=details", attrRoleUsers);
 
-		// 配置另外一个角色，来做对比
 		Collection<ConfigAttribute> attrRoleAdmins = new ArrayList<ConfigAttribute>();
 		ConfigAttribute attrRoleAdmin = new SecurityConfig("ROLE_ADMIN");
 		attrRoleAdmins.add(attrRoleAdmin);
-		// 有修改权限，没有添加和查看权限
 		resourceMap.put("/resource.do?method=modify", attrRoleAdmins);
 	}
 
 	@Override
 	public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
-		// 请求的URL
 		String requestUrl = ((FilterInvocation) object).getRequestUrl();
 		if (null == resourceMap || resourceMap.size() == 0) {
 			return null;
