@@ -24,17 +24,10 @@ public class OssAccessDecisionManager implements AccessDecisionManager {
 	public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes)
 			throws AccessDeniedException, InsufficientAuthenticationException {
 		
-		System.out.println("========SimAccessDecisionManager=============");
-		// object is a URL.
-		System.out.println(object.toString());
-
-		// 循环遍历出配置信息，所请求的资源拥有的角色(一个资源对多个角色)
 		Iterator<ConfigAttribute> iterator = configAttributes.iterator();
 		while (iterator.hasNext()) {
 			ConfigAttribute attribute = iterator.next();
-			//访问所请求资源所需要的角色  
 			String needRole = ((SecurityConfig) attribute).getAttribute();
-			// 用户的角色  
 			for (GrantedAuthority authority : authentication.getAuthorities()) {
 				if (needRole.equals(authority.getAuthority())) {
 					return;
