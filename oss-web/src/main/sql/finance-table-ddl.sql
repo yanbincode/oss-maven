@@ -167,6 +167,7 @@ create table oss_resource (
        name varchar2(255),
        type varchar2(2),
        active varchar2(2),
+       res_interface varchar2(4000),
        description varchar2(4000),
        creator_id number,
        created_time date,
@@ -218,6 +219,8 @@ create sequence s_oss_member_role
 increment by 1
 start with 1;
 
+--人员和资源id组合唯一性索引
+
 --角色资源表
 create table oss_role_resource (
        record_id number,
@@ -232,5 +235,7 @@ add constraint pk_oss_role_resource primary key(record_id);
 create sequence s_oss_role_resource
 increment by 1
 start with 1;
+
+--资源和角色id组合唯一性索引
 
 commit;
