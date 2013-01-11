@@ -19,19 +19,18 @@
       	<p>欢迎财务管理管理系统！</p>
     </div>
     <div id="loger">
-    	<form id="login_form" action="ossUser.do" method="post">
-    		<input type="hidden" name="method" value="login">
+    	<form id="login_form" action="/ctosii_middle/j_spring_security_check" method="post">
     		<span style="color: red;">&nbsp;${message}</span>
 	        <table>
 	          <tr>
 	            <td>
-	            	<input type="text" name="userName" value="userName" onfocus="setNull(this)" onblur="showBack(this)"
+	            	<input type="text" name="j_username" value="userName" onfocus="setNull(this)" onblur="showBack(this)"
 	            		style="border: 1px #004E98 solid; width: 205px; height: 26px; font-size: 16px; color: gray;" />
 	            </td>
 	          </tr>
 	          <tr>
 	            <td>
-	            	<input name="passWord" type="password" value="******" onfocus="setNull(this)" onblur="showBack(this)"
+	            	<input name="j_password" type="password" value="******" onfocus="setNull(this)" onblur="showBack(this)"
 	            	     style="border: 1px #004E98 solid; width: 205px; height: 26px; font-size: 16px; color: gray;" />
 	            </td>
 	          </tr>

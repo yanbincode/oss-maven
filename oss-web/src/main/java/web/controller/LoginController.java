@@ -11,7 +11,7 @@ import common.support.AbstractControllerSupport;
 import common.utils.MessageUtils;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/login.do")
 public class LoginController extends AbstractControllerSupport {
 
 	/**
@@ -66,6 +66,7 @@ public class LoginController extends AbstractControllerSupport {
 	 * @param model
 	 * @return
 	 */
+	@RequestMapping(params = "method=timeout", method = RequestMethod.GET)
 	public String timeout(ModelMap model) {
 		// 搁置时间太长，请重新登录！
 		model.addAttribute("message", MessageUtils.getInfoValue("TIMEOUT"));
@@ -77,7 +78,7 @@ public class LoginController extends AbstractControllerSupport {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(params = "method=login", method = RequestMethod.GET)
+	@RequestMapping(params = "method=login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request) {
 		return null;
 	}
