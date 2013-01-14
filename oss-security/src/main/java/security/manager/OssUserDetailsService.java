@@ -20,7 +20,6 @@ public class OssUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
 		System.out.println("username is " + username);
 		/**
 		 * 将角色和用户关联起来，可以在数据库中配置用户角色关系，直接load进行

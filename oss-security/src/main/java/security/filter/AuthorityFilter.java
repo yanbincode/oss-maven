@@ -36,8 +36,6 @@ public class AuthorityFilter extends AbstractSecurityInterceptor implements Filt
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException {
-		System.out.println("AuthorityFilter");
-
 		FilterInvocation fi = new FilterInvocation(request, response, chain);
 		InterceptorStatusToken token = super.beforeInvocation(fi);
 		try {
