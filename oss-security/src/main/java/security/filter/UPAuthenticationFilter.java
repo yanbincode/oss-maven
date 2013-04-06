@@ -60,14 +60,12 @@ public class UPAuthenticationFilter extends AbstractAuthenticationProcessingFilt
 
 		// UsernamePasswordAuthenticationToken实现 Authentication
 		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(userName, passWord);
-		// Place the last username attempted into HttpSession for views
 
 		// 允许子类设置详细属性
 		setDetails(request, authRequest);
 
 		// 运行UserDetailsService的loadUserByUsername 再次封装Authentication
 		return this.getAuthenticationManager().authenticate(authRequest);
-
 	}
 
 	protected void setDetails(HttpServletRequest request, UsernamePasswordAuthenticationToken authRequest) {
