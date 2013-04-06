@@ -58,4 +58,9 @@ public class OssUserServiceImpl extends AbstractServiceSupport implements OssUse
 		return ossUserDao.selectByUserNameAndPassWord(userName, passWord);
 	}
 
+	@Override
+	public OssUser getByUserName(String userName) {
+		return ossUserDao.selectByUserName(userName);
+	}
+
 }

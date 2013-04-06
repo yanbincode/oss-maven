@@ -50,4 +50,12 @@ public interface OssUserService {
 	 */
 	public OssUser getByUserNameAndPassWord(String userName, String passWord);
 
+	/**
+	 * 根据用户名获取用户
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	public OssUser getByUserName(String userName);
+
 }
