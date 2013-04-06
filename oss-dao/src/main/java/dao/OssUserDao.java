@@ -30,4 +30,12 @@ public interface OssUserDao<T> extends BaseHibernateDao<T> {
 	 */
 	public OssUser selectByUserNameAndPassWord(String userName, String passWord);
 
+	/**
+	 * 根据用户名获取用户
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	public OssUser selectByUserName(String userName);
+
 }
