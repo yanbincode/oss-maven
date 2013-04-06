@@ -16,7 +16,7 @@
 		<!-- 实现免登陆验证 -->
 		<remember-me />
 		<session-management session-fixation-protection="none" invalid-session-url="/login.do?method=timeout">
-			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+			<concurrency-control max-sessions="10" error-if-maximum-exceeded="true" />
 		</session-management>
 
 		<!-- 自定义权限过滤器，针对资源权限的控制 -->
