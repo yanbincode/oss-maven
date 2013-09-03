@@ -1,23 +1,23 @@
-SET DEFINE OFF;
+set define off;
 
---½¨Á¢pay_info±í
+--å»ºç«‹pay_infoè¡¨
 create table pay_info (
-  record_id number not null,  --×ÔÔö,Ö÷¼ü
+  record_id number not null,  --è‡ªå¢,ä¸»é”®
   day_time date not null,
-  pay_content varchar2(2000),  --Ö§³öÈ¥Ïò
-  pay_number number,  --Ö§³ö½ğ¶î
+  pay_content varchar2(2000) not null,  --æ”¯å‡ºå»å‘
+  pay_number number not null,  --æ”¯å‡ºé‡‘é¢
   remark varchar2(2000),
-  pay_member_id number not null,   --Íâ¼ü ¹ØÁª³ÉÔ±±í
-  pay_type number not null,
+  pay_member_id number not null,   --å¤–é”® å…³è”æˆå‘˜è¡¨
+  pay_type number,
   pay_value varchar2(2),
-  creator_id  number not null ,
-  created_time date not null ,
+  creator_id number not null,
+  created_time date not null,
   modifier_id number not null, 
   modified_time date not null
 )
 tablespace finance;
 
---½¨×ÔÔöĞòÁĞ
+--å»ºè‡ªå¢åºåˆ—
 create sequence s_pay_info
 increment by 1
 start with 1;
@@ -25,12 +25,12 @@ start with 1;
 alter table pay_info
 add constraint pk_pay_info primary key(record_id);
 
---½¨Á¢earn_info ±í
+--å»ºç«‹earn_info è¡¨
 create table earn_info (
-  record_id number not null,  --×ÔÔö,Ö÷¼ü
+  record_id number not null,  --è‡ªå¢,ä¸»é”®
   day_time date,
-  earn_content varchar2(2000),  --ÊÕÈëÈ¥Ïò
-  earn_number number,  --ÊÕÈë½ğ¶î
+  earn_content varchar2(2000),  --æ”¶å…¥å»å‘
+  earn_number number,  --æ”¶å…¥é‡‘é¢
   remark varchar2(2000),
   earn_member_id number,
   earn_type number not null,
@@ -48,9 +48,9 @@ start with 1;
 alter table earn_info
 add constraint pk_earn_info primary key(record_id); 
 
---½¨Á¢day_record±í
+--å»ºç«‹day_recordè¡¨
 create table day_record (
-  record_id number not null,  --×ÔÔö,Ö÷¼ü
+  record_id number not null,  --è‡ªå¢,ä¸»é”®
   day_time date,
   day_pay_count number,  
   day_earn_count number,
@@ -70,13 +70,13 @@ start with 1;
 alter table day_record
 add constraint pk_day_record primary key(record_id);  
 
---½¨Á¢month_record±í
+--å»ºç«‹month_recordè¡¨
 create table month_record (
-  record_id number,  --×ÔÔö,Ö÷¼ü
+  record_id number,  --è‡ªå¢,ä¸»é”®
   month_time date,
-  month_earn_count number,  --ÊÕÈë½ğ¶î
-  month_pay_count number,  --Ö§³ö½ğ¶î
-  month_count number, --ÔÂ×Ü¼Æ
+  month_earn_count number,  --æ”¶å…¥é‡‘é¢
+  month_pay_count number,  --æ”¯å‡ºé‡‘é¢
+  month_count number, --æœˆæ€»è®¡
   remark varchar2(2000),
   creator_id  number not null,
   created_time date not null,
@@ -92,13 +92,13 @@ start with 1;
 alter table month_record
 add constraint pk_month_record primary key(record_id); 
 
---½¨Á¢year_record±í
+--å»ºç«‹year_recordè¡¨
 create table year_record (
-  record_id number,  --×ÔÔö,Ö÷¼ü  
+  record_id number,  --è‡ªå¢,ä¸»é”®  
   year_time date,
-  year_earn_count number,  --ÊÕÈë½ğ¶î
-  year_pay_count number,  --Ö§³ö½ğ¶î
-  year_count number, --Äê×Ü¼Æ
+  year_earn_count number,  --æ”¶å…¥é‡‘é¢
+  year_pay_count number,  --æ”¯å‡ºé‡‘é¢
+  year_count number, --å¹´æ€»è®¡
   remark varchar2(2000),
   creator_id  number not null ,
   created_time date not null ,
@@ -114,7 +114,7 @@ create sequence s_year_record
 increment by 1
 start with 1;
 
---Í³¼ÆÀàĞÍ±í
+--ç»Ÿè®¡ç±»å‹è¡¨
 create table account_type (
        record_id number,
        type_id varchar2(2),
@@ -136,9 +136,9 @@ create sequence s_account_type
 increment by 1
 start with 1;
 
---½¨Á¢member±í
+--å»ºç«‹memberè¡¨
 create table member_info (
-  member_id number,  --×ÔÔö,Ö÷¼ü
+  member_id number,  --è‡ªå¢,ä¸»é”®
   name varchar(50),
   age number,
   gender number,
@@ -153,7 +153,7 @@ create table member_info (
 )
 tablespace finance;
 
---¸ø³ÉÔ±±í½¨sequence
+--ç»™æˆå‘˜è¡¨å»ºsequence
 create sequence s_member_info
 increment by 1
 start with 1;
@@ -161,7 +161,7 @@ start with 1;
 alter table member_info
 add constraint pk_member primary key(member_id);
 
---×ÊÔ´
+--èµ„æº
 create table oss_resource (
        resource_id number,
        resource_parent_id number,
@@ -184,7 +184,7 @@ create sequence s_oss_resource
 increment by 1
 start with 1;
 
---½ÇÉ«
+--è§’è‰²
 create table oss_role (
        role_id number,
        name varchar2(255),
@@ -205,7 +205,7 @@ create sequence s_oss_role
 increment by 1
 start with 1;
 
---ÈËÔ±½ÇÉ«±í
+--äººå‘˜è§’è‰²è¡¨
 create table oss_member_role (
        record_id number,
        member_id number,
@@ -220,9 +220,9 @@ create sequence s_oss_member_role
 increment by 1
 start with 1;
 
---ÈËÔ±ºÍ×ÊÔ´id×éºÏÎ¨Ò»ĞÔË÷Òı
+--äººå‘˜å’Œèµ„æºidç»„åˆå”¯ä¸€æ€§ç´¢å¼•
 
---½ÇÉ«×ÊÔ´±í
+--è§’è‰²èµ„æºè¡¨
 create table oss_role_resource (
        record_id number,
        role_id number,
@@ -237,6 +237,6 @@ create sequence s_oss_role_resource
 increment by 1
 start with 1;
 
---×ÊÔ´ºÍ½ÇÉ«id×éºÏÎ¨Ò»ĞÔË÷Òı
+--èµ„æºå’Œè§’è‰²idç»„åˆå”¯ä¸€æ€§ç´¢å¼•
 
 commit;
